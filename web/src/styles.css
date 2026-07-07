@@ -1,0 +1,861 @@
+/* SpacedChess — global styles.
+   Direction per DESIGN.md: dark-first, warm near-black neutrals, wood-tone
+   board, one green accent used sparingly, dense spacing, hairline borders,
+   minimal radii, mono for chess notation. The board is always the largest,
+   highest-contrast element on any screen it appears on. */
+
+:root {
+  --bg-base: #161512;
+  --bg-surface: #1e1c19;
+  --bg-raised: #26241f;
+  --text-primary: #e6e3dd;
+  --text-muted: #8b877e;
+  --board-light: #f0d9b5;
+  --board-dark: #b58863;
+  --accent-correct: #6a9955;
+  --accent-incorrect: #c0564b;
+  --accent-focus: #7fa650;
+
+  --border: 1px solid rgba(230, 227, 221, 0.1);
+  --radius: 3px;
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+h1 {
+  font-size: 18px;
+}
+h2 {
+  font-size: 15px;
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* ---------- Form elements ---------- */
+
+input,
+textarea,
+select {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 5px 8px;
+  font: inherit;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 1px solid var(--accent-focus);
+  outline-offset: 1px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.form-error {
+  color: var(--accent-incorrect);
+  font-size: 13px;
+  margin: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg-raised);
+  color: var(--text-primary);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: #2d2a24;
+}
+
+.btn--primary {
+  background: var(--accent-focus);
+  border-color: transparent;
+  color: #14170e;
+}
+
+.btn--primary:hover {
+  background: #8cb35c;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-muted);
+}
+
+.btn--ghost:hover {
+  background: var(--bg-raised);
+  color: var(--text-primary);
+}
+
+.btn--danger {
+  color: var(--accent-incorrect);
+}
+
+.btn--sm {
+  padding: 3px 10px;
+  font-size: 13px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---------- App chrome ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 14px;
+  height: 42px;
+  border-bottom: var(--border);
+  flex-shrink: 0;
+}
+
+.topbar__brand {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: 4px;
+}
+
+.topbar__nav a {
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+
+.topbar__nav a:hover {
+  color: var(--text-primary);
+}
+
+.topbar__nav a.active {
+  color: var(--accent-focus);
+}
+
+.topbar__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar__user,
+.topbar__nodue {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.app__main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+/* ---------- Login ---------- */
+
+.login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__box {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-surface);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.login__brand {
+  margin: 0;
+}
+
+.login__sub {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ---------- Board ---------- */
+
+.board {
+  position: relative;
+  width: 100%;
+}
+
+.board__cg {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.board .cg-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.board--mini {
+  width: 84px;
+}
+
+.board--mini .cg-wrap {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+cg-board square.last-move {
+  background-color: rgba(127, 166, 80, 0.35);
+}
+
+cg-board square.selected {
+  background-color: rgba(127, 166, 80, 0.45);
+}
+
+.board__promo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(22, 21, 18, 0.85);
+  z-index: 5;
+}
+
+.board__promo button {
+  width: 140px;
+  background: var(--bg-raised);
+  color: var(--text-primary);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.board__promo button:hover {
+  border-color: var(--accent-focus);
+}
+
+.board__promo-cancel {
+  color: var(--text-muted) !important;
+}
+
+/* ---------- Review session (DESIGN.md §4.1) ---------- */
+
+.review {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.review__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 14px;
+  border-bottom: var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.review__header a {
+  color: var(--text-muted);
+}
+
+.review__header a:hover {
+  color: var(--text-primary);
+}
+
+.review__progress {
+  font-variant-numeric: tabular-nums;
+}
+
+.review__body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* The board is the dominant element: sized by viewport height so it and the
+   side panel fit without scrolling on a typical screen. */
+.review__board {
+  width: min(calc(100vh - 170px), 62vw, 820px);
+  flex-shrink: 0;
+}
+
+.review__panel {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.card-type-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: var(--border);
+  padding-bottom: 6px;
+}
+
+.review__prompt {
+  font-size: 14px;
+}
+
+.review__prompt p {
+  margin: 0 0 8px;
+}
+
+.review__intended {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.review__answer {
+  white-space: pre-wrap;
+  border-left: 2px solid var(--accent-focus);
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.review__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.review__steps .step--active {
+  color: var(--text-primary);
+}
+
+.review__steps .step--ok {
+  color: var(--accent-correct);
+}
+
+.review__steps .step--fail {
+  color: var(--accent-incorrect);
+}
+
+.review__footer {
+  min-height: 58px;
+  border-top: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 14px;
+  flex-shrink: 0;
+}
+
+.review__verdict {
+  font-weight: 600;
+}
+
+.review__verdict--correct {
+  color: var(--accent-correct);
+}
+
+.review__verdict--incorrect {
+  color: var(--accent-incorrect);
+}
+
+.review__replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review__replay .review__verdict-line {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 13px;
+}
+
+.review__done {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.review__done strong {
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+/* ---------- Library ---------- */
+
+.library__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.library__toolbar input[type='search'] {
+  width: 200px;
+}
+
+.library__count {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-left: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-bottom: var(--border);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 6px 10px;
+  border-bottom: var(--border);
+  vertical-align: middle;
+}
+
+.table tbody tr {
+  cursor: pointer;
+}
+
+.table tbody tr:hover {
+  background: var(--bg-surface);
+}
+
+.tag-chip {
+  display: inline-block;
+  background: var(--bg-raised);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 1px 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 1px 3px 1px 0;
+}
+
+.due-now {
+  color: var(--accent-focus);
+  font-weight: 500;
+}
+
+.type-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.empty-state {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ---------- Card editor ---------- */
+
+.editor {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  max-width: 1200px;
+}
+
+.editor__board {
+  width: min(calc(100vh - 140px), 48vw, 640px);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+}
+
+.editor__board-hint {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.editor__form {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.editor__form fieldset {
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.editor__form legend {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.segmented {
+  display: flex;
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.segmented button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 5px 12px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.segmented button + button {
+  border-left: var(--border);
+}
+
+.segmented button.active {
+  background: var(--bg-raised);
+  color: var(--text-primary);
+}
+
+.line-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.line-field__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.line-field__moves {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  min-height: 26px;
+  padding: 4px 8px;
+  background: var(--bg-base);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+.line-field__moves.recording {
+  border-color: var(--accent-focus);
+}
+
+.line-field__moves .placeholder {
+  color: var(--text-muted);
+}
+
+.record-btn {
+  margin-left: auto;
+}
+
+.fen-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.fen-row label {
+  flex: 1;
+}
+
+.fen-row input {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-primary);
+  flex-direction: row;
+}
+
+.editor__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ---------- Tag input ---------- */
+
+.tag-input {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  background: var(--bg-base);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 4px 6px;
+}
+
+.tag-input input {
+  border: none;
+  background: transparent;
+  padding: 2px 4px;
+  flex: 1;
+  min-width: 90px;
+}
+
+.tag-input input:focus-visible {
+  outline: none;
+}
+
+.tag-input__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-raised);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 1px 4px 1px 7px;
+  font-size: 12px;
+}
+
+.tag-input__chip button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.tag-input__chip button:hover {
+  color: var(--accent-incorrect);
+}
+
+.tag-input__suggest {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: var(--bg-raised);
+  border: var(--border);
+  border-radius: var(--radius);
+  max-height: 160px;
+  overflow-y: auto;
+  margin-top: 2px;
+}
+
+.tag-input__suggest button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tag-input__suggest button:hover,
+.tag-input__suggest button.focused {
+  background: var(--bg-surface);
+  color: var(--accent-focus);
+}
+
+/* ---------- Simple management lists (sets, tags) ---------- */
+
+.manage {
+  max-width: 560px;
+}
+
+.manage__new {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.manage__new input {
+  flex: 1;
+}
+
+.manage__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 4px;
+  border-bottom: var(--border);
+}
+
+.manage__row-name {
+  flex: 1;
+}
+
+.manage__row-count {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.manage__row input {
+  flex: 1;
+}
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 140ms ease-out;
+  }
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* ---------- Narrow screens (secondary concern per SPEC §11) ---------- */
+
+@media (max-width: 860px) {
+  .review__body {
+    flex-direction: column;
+    align-items: center;
+  }
+  .review__board {
+    width: min(94vw, calc(100vh - 300px));
+  }
+  .review__panel {
+    width: min(94vw, 480px);
+  }
+  .editor {
+    flex-direction: column;
+  }
+  .editor__board {
+    width: min(94vw, 480px);
+    position: static;
+  }
+}
