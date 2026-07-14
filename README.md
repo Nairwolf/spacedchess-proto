@@ -1,13 +1,17 @@
 # SpacedChess Proto
 
-> **An AI-generated prototype of SpacedChess.** The real SpacedChess will be
-> built from scratch, by hand, with no code generation — this repo is
-> throwaway scaffolding used to explore the idea.
+> **An AI-generated prototype of SpacedChess**, built in one pass from a
+> written brief to explore the idea end-to-end. The production version will be
+> written by hand, from scratch, and open-sourced separately.
 
-A private, personal web app for storing and reviewing your own chess
-mistakes with spaced repetition. See `PITCH.md` for the why, `SPEC.md` for
-product behavior, `ARCHITECTURE.md` for technical decisions, and
-`DESIGN.md` for the visual direction.
+A single-user web app for storing and reviewing your own chess mistakes with
+spaced repetition. See `PITCH.md` for the why, `SPEC.md` for product behavior,
+`ARCHITECTURE.md` for technical decisions, and `DESIGN.md` for the visual
+direction.
+
+Built with Go (stdlib HTTP, pgx/PostgreSQL), a React + TypeScript SPA
+(chessground, chess.js), SM-2 spaced repetition, and server-side chess-move
+validation.
 
 ## Run it (Docker Compose)
 
