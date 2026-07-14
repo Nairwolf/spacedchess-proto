@@ -1,4 +1,8 @@
-# SpacedChess
+# SpacedChess Proto
+
+> **An AI-generated prototype of SpacedChess.** The real SpacedChess will be
+> built from scratch, by hand, with no code generation — this repo is
+> throwaway scaffolding used to explore the idea.
 
 A private, personal web app for storing and reviewing your own chess
 mistakes with spaced repetition. See `PITCH.md` for the why, `SPEC.md` for

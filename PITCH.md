@@ -1,4 +1,7 @@
-# SpacedChess
+# SpacedChess Proto
+
+> This document describes SpacedChess. This repo is an **AI-generated
+> prototype** of it — the real SpacedChess will be built by hand, from scratch.
 
 Most players analyze their games with an engine after the fact. The engine
 finds the mistakes — a missed tactic, a blunder, a wrong plan — but it

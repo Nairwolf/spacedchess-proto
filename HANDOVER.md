@@ -1,6 +1,8 @@
 # HANDOVER.md
 
-State of the SpacedChess implementation as of 2026-07-06. The app was
+State of the SpacedChess implementation as of 2026-07-06. This is an
+**AI-generated prototype** ("SpacedChess Proto"); the intended product is to
+be rebuilt by hand from scratch. The app was
 built in one pass from the four brief documents (`SPEC.md`,
 `ARCHITECTURE.md`, `DESIGN.md`, `PITCH.md`) and is feature-complete for
 v1 as specified. Nothing is committed to git yet.
@@ -47,11 +49,13 @@ v1 as specified. Nothing is committed to git yet.
   7-move refutation line with auto-played replies; strategic reveal +
   self-grade; session-complete tally. Screenshots were checked against
   DESIGN.md.
-- **Not verified**: the Docker build/Compose path itself — Docker was not
-  available in the build environment. The files are written to spec and
-  everything they wrap (binary, migrations, static serving, env vars) was
-  exercised directly. **First thing to do on a Docker machine:
-  `docker compose up --build` and click through once.**
+- **Docker Compose path** (verified 2026-07-07, Docker 29 / Compose 5):
+  `docker compose up --build` with default env — image builds, Postgres
+  comes up healthy, migrations apply, and the containerized API was
+  driven end-to-end with curl: register/login/me, tactical card create
+  (server-side validation active), due queue, correct review with the
+  expected SM-2 transition (EF 2.5→2.6, interval 1, reps 1), JS assets
+  served with correct MIME type, SPA fallback on client routes.
 
 ## Decisions made where the brief was ambiguous
 
@@ -87,7 +91,6 @@ CLAUDE.md where they affect day-to-day work.
 
 ## Known gaps / next steps (none are SPEC §11/§12 features)
 
-- Run the Docker Compose path once on a machine with Docker (see above).
 - Promotion input: the Board component has a promotion picker
   (auto-queen deliberately avoided since solutions may underpromote),
   but no automated test exercises it.
